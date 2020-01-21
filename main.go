@@ -27,7 +27,7 @@ func justAnAPI() {
 
 	s.HandleFunc("/search", searchData).Methods("GET", "POST")
 
-	http.ListenAndServe(":8080", r)
+	_ = http.ListenAndServe(":8080", r)
 }
 
 func elasticConnection() *elastic.Client {
@@ -125,7 +125,7 @@ func searchData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var post users
 	_ = json.NewDecoder(r.Body).Decode(&post)
-	json.NewEncoder(w).Encode(elasticSearch(post))
+	_ = json.NewEncoder(w).Encode(elasticSearch(post))
 }
 
 func main() {
